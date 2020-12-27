@@ -1,0 +1,43 @@
+<div *ngIf="godownId">
+    <h2>
+        Add Rack
+    </h2>
+    <form class="rack-form" [formGroup]="rackForm" (ngSubmit)="onSubmit()">
+        <mat-form-field class="example-full-width">
+            <mat-label>Rack Code</mat-label>
+            <input matInput placeholder="Ex. R001" formControlName="rackCode">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Rack Description</mat-label>
+            <textarea matInput placeholder="Ex. It stores shoes..." formControlName="rackDescription"></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Rack Capacity</mat-label>
+            <input matInput type="number" min="0" max="99" placeholder="Ex. 80" formControlName="rackCapacity">
+        </mat-form-field>
+
+        <br />
+        <mat-slide-toggle class="example-margin" (change)="toggle($event)" formControlName="isDefault">
+            Default
+        </mat-slide-toggle>
+
+        <mat-slide-toggle class="example-margin" formControlName="isActive">
+            Is Active
+        </mat-slide-toggle>
+
+        <br />
+        <button class="button" mat-raised-button color="primary" type="submit">Add Rack</button>
+
+        <br />
+        <div *ngIf="errorOnPage" class="error">
+            {{errorMessage}}
+        </div>
+
+    </form>
+    <br />
+    <div *ngIf="racks.length">
+        <app-rack-list [godownId]="godownId" [racks]="racks"></app-rack-list>
+    </div>
+</div>

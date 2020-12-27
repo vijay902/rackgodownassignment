@@ -1,0 +1,46 @@
+<form class="godown-form" [formGroup]="godownForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="example-full-width">
+        <mat-label>Godown Code</mat-label>
+        <input matInput placeholder="Ex. R001" formControlName="godownCode">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Godown Description</mat-label>
+        <textarea matInput placeholder="Ex. Exclusive warehouse for..." formControlName="godownDescription"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Godown Address</mat-label>
+        <textarea matInput placeholder="Ex. New Delhi " formControlName="godownAddress"></textarea>
+    </mat-form-field>
+
+    <br />
+    <mat-slide-toggle class="example-margin" (change)="toggle($event)" formControlName="isgodownDefault">
+        Default
+    </mat-slide-toggle>
+
+    <mat-slide-toggle class="example-margin" formControlName="isgodownActive">
+        Is Active
+    </mat-slide-toggle>
+
+    <br />
+    <div *ngIf="!submitted">
+        <button class="button" mat-raised-button color="primary" type="submit">Add Godown</button>
+    </div>
+
+    <div *ngIf="submitted">
+        <button class="button" mat-raised-button color="primary" type="submit">Edit Godown</button>
+    </div>
+
+
+    <br />
+    <div *ngIf="errorOnPage" class="error">
+        {{errorMessage}}
+    </div>
+
+</form>
+<br />
+<br />
+<div *ngIf="godownId">
+<app-rack-add [godownId]="godownId"></app-rack-add>
+</div>

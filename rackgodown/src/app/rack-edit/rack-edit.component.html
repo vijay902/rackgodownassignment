@@ -1,0 +1,38 @@
+<h2>
+    Showing rack details for : {{id}}
+</h2>
+
+<form class="rack-form" [formGroup]="rackForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="example-full-width">
+        <mat-label>Rack Code</mat-label>
+        <input matInput placeholder="Ex. R001" formControlName="rackCode">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Rack Description</mat-label>
+        <textarea matInput placeholder="Ex. It stores shoes..." formControlName="rackDescription"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Rack Capacity</mat-label>
+        <textarea matInput placeholder="Ex. 1000" formControlName="rackCapacity"></textarea>
+    </mat-form-field>
+
+    <br />
+    <mat-slide-toggle class="example-margin" (change)="toggle($event)" formControlName="isDefault">
+        Default
+    </mat-slide-toggle>
+
+    <mat-slide-toggle class="example-margin" formControlName="isActive">
+        Is Active
+    </mat-slide-toggle>
+
+    <br />
+    <button class="button" mat-raised-button color="primary" type="submit">Edit Rack</button>
+
+    <br/>
+    <div *ngIf="errorOnPage" class="error">
+        {{errorMessage}}
+    </div>
+
+</form>
