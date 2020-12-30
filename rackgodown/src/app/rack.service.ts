@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { Rack } from './models/rack';
 import { catchError, retry } from 'rxjs/operators';
+import {Appsettings} from './appsettings';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -20,20 +21,20 @@ export class RackService {
 
   // Uses http.get() to load data from a single API endpoint
   getRacks(id:number): Observable<Rack[]> {
-    return this.http.get<Rack[]>('https://localhost:44390/api/rack/getgodownracks/'+ id);
+    return this.http.get<Rack[]>(Appsettings.API_ENDPOINT + '/rack/getgodownracks/'+ id);
   }
 
   getRack(id: number): Observable<Rack> {
-    return this.http.get<Rack>('https://localhost:44390/api/rack/' + id);
+    return this.http.get<Rack>(Appsettings.API_ENDPOINT + '/rack/' + id);
   }
 
   checkIsDefault(): Observable<boolean> {
-    return this.http.get<any>('https://localhost:44390/api/rack/isdefault')
+    return this.http.get<any>(Appsettings.API_ENDPOINT + '/rack/isdefault')
   }
 
 
   deleteRack(id:number){
-    this.http.delete('https://localhost:44390/api/rack/'+ id).subscribe(data => {
+    this.http.delete(Appsettings.API_ENDPOINT + '/rack/'+ id).subscribe(data => {
     });
   }
 
@@ -50,7 +51,7 @@ export class RackService {
       GoDownId: rack.GoDownId
     };
 
-    return this.http.post<Rack>('https://localhost:44390/api/rack', JSON.stringify(body), httpOptions);
+    return this.http.post<Rack>(Appsettings.API_ENDPOINT + '/rack', JSON.stringify(body), httpOptions);
 
   };
 
@@ -66,7 +67,7 @@ export class RackService {
       IsActive: rack.IsActive
     };
 
-    this.http.post('https://localhost:44390/api/rack/update', JSON.stringify(body), httpOptions)
+    this.http.post(Appsettings.API_ENDPOINT + '/rack/update', JSON.stringify(body), httpOptions)
       .subscribe((data) => { console.log(data) }
       )
 
